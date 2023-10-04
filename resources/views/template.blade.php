@@ -251,6 +251,13 @@ Coded by www.creative-tim.com
     <script src="{{asset('assets')}}/demo/demo.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+
     <script>
         jQuery(document).ready(function() {
             $('.select2suspect').select2({
@@ -321,6 +328,18 @@ Coded by www.creative-tim.com
     });
 });
 </script> 
+<script>
+    $(document).ready(function() {
+    $('#dataTable-print').DataTable({
+        "order": [[0, 'desc']],
+        "dom": 'Bfrtip',
+        "buttons": [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+        
+    });
+});
+</script>
 @stack('js')
 </body>
 

@@ -2,6 +2,12 @@
 @section('content')
 <div class="content">
 <h1> Data Pasien </h1>
+
+@if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
@@ -28,7 +34,12 @@
                 <td>{{ $DataPasien->tinggi_badan }}</td>
                 <td>{{ $DataPasien->no_hp }}</td>
                 <td><a href="{{route('data_pasien.edit',$DataPasien->id)}}" class="btn btn-info" role="button">Update</a></td>
-                <td><a href="{{route('data_kunjungan.create',$DataPasien->id)}}" class="btn btn-info" role="button">Tambah Kunjungan</a></td>
+                <td>
+                  <!-- @if(is_null($DataPasien->tgl_pulang)) -->
+                  <a href="{{route('data_kunjungan.create',$DataPasien->id)}}" class="btn btn-info" role="button">Tambah Kunjungan</a>
+                  <!-- @else()
+                  @endif -->
+                </td>
                 <td><a href="" class="btn btn-info" role="button">Detail Pasien</a></td>
                 <!-- Tambahkan kolom lain yang ingin ditampilkan -->
             </tr>

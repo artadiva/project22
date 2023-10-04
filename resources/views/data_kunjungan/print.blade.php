@@ -1,11 +1,10 @@
 @extends('template')
 @section('content')
 <div class="content">
-<h1> Data Kunjungan Pasien </h1>
+<h1> Print Data Kunjungan Pasien </h1>
 
 <!-- <button type="button" class="btn btn-warning">Tambah</button> -->
-
-<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+<table class="table table-bordered" id="dataTable-print" width="100%" cellspacing="0">
         <thead>
           <tr>
           <th>Tanggal Kunjungan </th>
@@ -19,7 +18,7 @@
               <th>Diet</th>
               <th>CF</th>
               
-              <th>Update</th>
+              <!-- <th>Update</th> -->
           </tr>
         </thead>
         <tbody>
@@ -36,7 +35,7 @@
                 <td>{{ $DataKunjungan->diet }}</td>
                 <td>{{ $DataKunjungan->cf }} <br> @if($DataKunjungan->cf >= 0.8) Tinggi @else Rendah @endif</td>
                 
-                <td><a href="{{route('data_kunjungan.edit',$DataKunjungan->id)}}" class="btn btn-info" role="button">Update</a></td>
+                <!-- <td><a href="{{route('data_pasien.edit',$DataKunjungan->id)}}" class="btn btn-info" role="button">Update</a></td> -->
                 <!-- Tambahkan kolom lain yang ingin ditampilkan -->
             </tr>
             @endforeach
@@ -47,7 +46,7 @@
 </div>
 <script>
 $(document).ready(function() {
-    $('#dataTable').DataTable({
+    $('#dataTable-print').DataTable({
         "order": [[2, 'desc']],
         "columnDefs": [
             { "orderable": false, "targets": 0 } // This disables sorting for the first column (index 0)

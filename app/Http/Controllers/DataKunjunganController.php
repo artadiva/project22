@@ -9,6 +9,7 @@ use App\Models\MasterSuspect;
 use App\Models\MasterDiagnosa;
 use App\Models\MasterRule;
 use App\Models\Rule;
+use Carbon\Carbon;
 
 class DataKunjunganController extends Controller
 {
@@ -38,9 +39,22 @@ class DataKunjunganController extends Controller
     public function create($id_pasien)
     {
         $DataPasien = DataPasien::find($id_pasien);
+        if ($DataPasien) {
+            // Periksa apakah pasien memiliki kunjungan aktif
+            $kunjunganAktif = DataKunjungan::where('id_pasien', $id_pasien)
+                ->whereNull('tgl_pulang')
+                ->exists();
+    
+            if (!$kunjunganAktif) {
+                $update = true;
+            return view('data_kunjungan.tambah_kunjungan',compact('id_pasien', 'update', 'DataPasien'));
+            } else {
+                return redirect()->back()->with('error', 'Pasien masih memiliki kunjungan aktif.');
+            }
+        } else {
+            return redirect()->back()->with('error', 'Pasien tidak ditemukan.');
+        }
         
-        $update = true;
-        return view('data_kunjungan.tambah_kunjungan',compact('id_pasien', 'update', 'DataPasien'));
     }
 
     public function store(Request $request)
@@ -202,5 +216,18 @@ class DataKunjunganController extends Controller
         $DataKunjungans->delete();
 
         return redirect()->route('data_kunjungan.index')->with('success', 'DataKunjungans deleted successfully.');
+    }
+    public function print()
+    {
+        
+
+        $now = Carbon::now();
+        $formattedDate = $now->format('Y-m-d');
+        $DataKunjungans = DataKunjungan::with('pasien')
+        ->where('tgl_kunjungan',$formattedDate)
+        ->where('tgl_pulang',null)
+        ->orderByRaw('created_at DESC')->get();
+        // dd($DataKunjungans);
+        return view('data_kunjungan.print', compact('DataKunjungans'));
     }
 }

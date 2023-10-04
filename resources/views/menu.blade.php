@@ -19,6 +19,12 @@
             </a>
           </li>
           <li class="@if(Route::is('data_kunjungan')) active @endif">
+            <a href="{{route('data_kunjungan.print')}}">
+              <i class="nc-icon nc-single-02"></i>
+              <p>Print Etiket</p>
+            </a>
+          </li>
+          <li class="@if(Route::is('data_kunjungan')) active @endif">
             <a href="{{route('data_kunjungan.index')}}">
               <i class="nc-icon nc-single-02"></i>
               <p>Data Kunjungan</p>

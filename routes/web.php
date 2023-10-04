@@ -120,6 +120,7 @@ Route::group(['prefix' => 'data_kunjungan'], function () {
     Route::get('/edit/{id}', [App\Http\Controllers\DataKunjunganController::class, 'edit'])->name('data_kunjungan.edit');
     Route::post('/update/{id}', [App\Http\Controllers\DataKunjunganController::class, 'update'])->name('data_kunjungan.update');
     Route::get('/destroy/{id}', [App\Http\Controllers\DataKunjunganController::class, 'destroy'])->name('data_kunjungan.destroy');
+    Route::get('/print', [App\Http\Controllers\DataKunjunganController::class, 'print'])->name('data_kunjungan.print');
 });
 Route::group(['prefix' => 'master_rule'], function () {
     Route::get('/', [App\Http\Controllers\MasterRuleController::class, 'index'])->name('master_rule.index');
